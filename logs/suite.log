@@ -16,3 +16,6 @@ assert '/inventory.html' in 'https://www.saucedemo.com/'
  +  where 'https://www.saucedemo.com/' = <selenium.webdriver.chrome.webdriver.WebDriver (session="410dc5b99cd0ad4fb5c8cda5f134ec06")>.current_url
 2025-12-01 19:20:18 INFO TalentoTech: Completando con los datos de usuario
 2025-12-01 19:20:18 INFO TalentoTech: Test de login fallido completado con exito
+2025-12-03 20:04:37 INFO TalentoTech: Completando con los datos de usuario
+2025-12-03 20:04:37 INFO TalentoTech: verficando redireccionamiento dentro de la pagina
+2025-12-03 20:04:41 INFO TalentoTech: Completando con los datos de usuario

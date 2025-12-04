@@ -3,6 +3,13 @@ from selenium import webdriver
 from pages.login_page import LoginPage
 from selenium.webdriver.chrome.options import Options
 
+import pathlib
+from datetime import datetime
+import time
+
+target = pathlib.Path("reports/screens")
+target.mkdir(parents=True, exist_ok=True)
+
 @pytest.fixture
 def driver():
     options = Options()
@@ -13,8 +20,8 @@ def driver():
     driver.quit()
 
 @pytest.fixture
-def login_in_driver(driver,usuario,password):
-    LoginPage(driver).abrir_pagina().login_completo(usuario,password)
+def login_in_driver(driver):
+    LoginPage(driver).abrir_pagina()
     return driver
 
 @pytest.fixture
@@ -23,4 +30,19 @@ def url_base():
 
 @pytest.fixture
 def header_request():
-    return {"x-api-key": "reqres-free-v1"}
+    return {"x-api-key": "reqres_d66028fd3d5e461e8d469823975a6243"}
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item,call):
+    outcome = yield
+
+    report = outcome.get_result()
+
+    if report.when in ("setup","call") and report.failed:
+        driver = item.funcargs.get("driver",None)
+        
+        if driver:
+            timestamp_comun= datetime.now().strftime("%Y%m%d_%H%M%S")
+            timestamp_unix = int(time.time())
+            file_name= target / f"{report.when}_{item.name}_{timestamp_comun}.png"
+            driver.save_screenshot(str(file_name))

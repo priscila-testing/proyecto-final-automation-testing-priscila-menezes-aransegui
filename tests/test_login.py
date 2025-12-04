@@ -12,6 +12,8 @@ from utils.logger import logger
 def test_login_validation(login_in_driver,usuario,password,debe_funcionar):
     logger.info("Completando con los datos de usuario")
     driver = login_in_driver
+    
+    LoginPage(driver).login_completo(usuario,password)
 
     if debe_funcionar == True:
         logger.info("verficando redireccionamiento dentro de la pagina")
@@ -24,6 +26,3 @@ def test_login_validation(login_in_driver,usuario,password,debe_funcionar):
         mensaje_error = LoginPage(driver).obtener_error()
         assert "Epic sadface" in mensaje_error, "el mensaje de error no se esta mostrando"
         logger.info("Test de login fallido completado con exito")
-
-
-
