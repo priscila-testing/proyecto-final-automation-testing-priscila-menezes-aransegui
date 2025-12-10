@@ -1,0 +1,8 @@
+pytest
+pytest-html
+selenium
+faker
+requests
+webdriver-manager
+
+# py -m install -r requirements.txt
